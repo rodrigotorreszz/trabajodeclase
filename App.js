@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Switch, StyleSheet, TouchableOpacity, Alert, ActivityIndicator, FlatList, Text } from 'react-native';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
-import { Picker } from '@react-native-picker/picker';  // Use the new package for Picker
-import DateTimePicker from '@react-native-community/datetimepicker';  // Cross-platform DatePicker
-import { ProgressBar } from 'react-native-paper';  // Cross-platform ProgressBar
+import { Picker } from '@react-native-picker/picker';  
+import DateTimePicker from '@react-native-community/datetimepicker';  
+import { ProgressBar } from 'react-native-paper';  
 
 const App = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -12,15 +12,15 @@ const App = () => {
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
 
-  // Función para cambiar el estado del interruptor
+
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
-  // Función para cambiar el valor del Picker
+
   const handlePickerChange = (itemValue) => {
     setSelectedValue(itemValue);
   };
 
-  // Función para mostrar el DatePicker
+
   const onDateChange = (event, selectedDate) => {
     setShowDatePicker(false);
     if (selectedDate) {
@@ -29,14 +29,12 @@ const App = () => {
     }
   };
 
-  // Función para simular el progreso
   const simulateProgress = () => {
     if (progress < 100) {
       setTimeout(() => setProgress(progress + 10), 500);
     }
   };
 
-  // Función para renderizar los items de la lista
   const renderItem = ({ item }) => (
     <Text style={styles.listItem}>{item}</Text>
   );
@@ -45,14 +43,12 @@ const App = () => {
     <SafeAreaProvider>
       <SafeAreaView style={styles.container}>
         
-        {/* FlatList como contenedor principal */}
         <FlatList
           data={['Item 1', 'Item 2', 'Item 3']}
           renderItem={renderItem}
           keyExtractor={(item, index) => index.toString()}
           ListHeaderComponent={
             <>
-              {/* Switch para alternar entre dos estados */}
               <Switch
                 trackColor={{ false: '#767577', true: '#81b0ff' }}
                 thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
@@ -61,15 +57,13 @@ const App = () => {
                 value={isEnabled}
               />
               
-              {/* TouchableOpacity para crear un botón interactivo */}
+
               <TouchableOpacity style={styles.button} onPress={() => Alert.alert("¡Botón presionado!")}>
                 <Text style={styles.buttonText}>Presiona aquí</Text>
               </TouchableOpacity>
 
-              {/* ActivityIndicator para mostrar un indicador de carga */}
               <ActivityIndicator size="large" color="#007BFF" style={styles.spinner} />
 
-              {/* Picker para seleccionar un valor */}
               <Picker
                 selectedValue={selectedValue}
                 style={styles.picker}
@@ -80,7 +74,6 @@ const App = () => {
                 <Picker.Item label="twice" value="TWICE" />
               </Picker>
 
-              {/* DateTimePicker para seleccionar una fecha */}
               <TouchableOpacity style={styles.button} onPress={() => setShowDatePicker(true)}>
                 <Text style={styles.buttonText}>Selecciona una fecha</Text>
               </TouchableOpacity>
@@ -93,8 +86,6 @@ const App = () => {
                   onChange={onDateChange}
                 />
               )}
-
-              {/* ProgressBar para mostrar el progreso */}
               <ProgressBar progress={progress / 100} style={styles.progressBar} />
               <TouchableOpacity style={styles.button} onPress={simulateProgress}>
                 <Text style={styles.buttonText}>Simular Progreso</Text>
@@ -103,7 +94,6 @@ const App = () => {
           }
           ListFooterComponent={
             <Text style={styles.text}>
-              {/* Información descriptiva de los componentes */}
               <Text style={styles.subheading}>SafeAreaProvider: </Text>
               SafeAreaProvider es un proveedor de contexto que se usa para envolver toda tu aplicación y permitir que los componentes hijos accedan a la información de las áreas seguras del dispositivo.{'\n\n'}
 
